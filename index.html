@@ -7,18 +7,32 @@
 </head>
 <body>
     <h1>BattleBit Server List</h1>
-    
-    </p  >
+    <table>
+        <tr>
+            <th id = "name">Name</th>
+            <th id ="map">Map</th>
+            <th id ="mapsize">MapSize</th>
+            <th id ="daynight">DayNight</th>
+            <th id ="players">Players</th>
+            <th id ="queueplayers">QueuePlayers</th>
+            <th id ="maxplayers">MaxPlayers</th>
+          </tr>
+    </table>
     <script>
-        function getServerList() {
-            fetch('https://publicapi.battlebit.cloud/Servers/GetServerList').then((Response) => Response.json()).then((data) => {
-                console.log(data);
-            }).catch((err) => {
-                console.log("Servers not found", err);
-            });
-        }
+        fetch('https://publicapi.battlebit.cloud/Servers/GetServerList')
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(user => {
+                const name = `<tr>${user.Name}</tr>`;
+                const map = `<tr>${user.Map}</tr>`;
+                document.querySelector('tr').insertAdjacentHTML('afterend', name);
+                document.querySelector('tr').insertAdjacentHTML('beforeend', map);
 
-        getServerList();
+            })
+        })
+        .catch(err => console.log(err));
     </script>
 </body>
 </html>
