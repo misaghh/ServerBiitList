@@ -1,1 +1,13 @@
 
+td {
+  width: 10rem;
+  padding: 1%;
+  
+}
+
+
+
+th {
+    text-decoration: underline;
+    text-align: left;
+}
