@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +18,59 @@
 </head>
 <body>
     <h1>BattleBit Server List</h1>
-    <table>
-        <tr>
-            <th id = "name">Name</th>
-            <th id ="map">Map</th>
-            <th id ="mapsize">MapSize</th>
-            <th id ="daynight">DayNight</th>
-            <th id ="players">Players</th>
-            <th id ="queueplayers">QueuePlayers</th>
-            <th id ="maxplayers">MaxPlayers</th>
-          </tr>
+    <table id = "data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Map</th>
+                <th>MapSize</th>
+                <th>DayNight</th>
+                <th>Players</th>
+                <th>QueuePlayers</th>
+                <th>MaxPlayers</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
     <script>
         fetch('https://publicapi.battlebit.cloud/Servers/GetServerList')
-        .then(response => {
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            data.forEach(user => {
-                const name = `<tr>${user.Name}</tr>`;
-                const map = `<tr>${user.Map}</tr>`;
-                document.querySelector('tr').insertAdjacentHTML('afterend', name);
-                document.querySelector('tr').insertAdjacentHTML('beforeend', map);
+            const tableBody = document.querySelector('#data-table tbody');
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const mapCell = document.createElement('td');
+                const mapsizeCell = document.createElement('td');
+                const daynightCell = document.createElement('td');
+                const playersCell = document.createElement('td');
+                const queueplayersCell = document.createElement('td');
+                const maxplayersCell = document.createElement('td');
 
-            })
+
+                nameCell.textContent = item.name;
+                mapCell.textContent = item.map;
+                mapsizeCell.textContent = item.mapsize;
+                daynightCell.textContent = item.daynight;
+                playersCell.textContent = item.players;
+                queueplayersCell.textContent = item.queueplayers;
+                maxplayersCell.textContent = item.maxplayers;
+
+
+                row.appendChild(nameCell);
+                row.appendChild(mapCell);
+                row.appendChild(mapsizeCell);
+                row.appendChild(daynightCell);
+                row.appendChild(playersCell);
+                row.appendChild(queueplayersCell);
+                row.appendChild(maxplayersCell);
+
+                tableBody.appendChild(row);
+            });
         })
-        .catch(err => console.log(err));
+        .catch(error => {
+            console.error('Error:', error)
+        });
     </script>
 </body>
 </html>
