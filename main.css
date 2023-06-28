@@ -6,6 +6,25 @@ td {
 }
 
 
+@media (min-width: 320px) and (max-width: 480px) {
+  body {
+    background-color: powderblue;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1000px) {
+  body {
+    background-color: limegreen;
+  }
+}
+
+
+@media (min-width: 1001px) {
+  body {
+    background-color: seagreen;
+  }
+}
+
 
 th {
     text-decoration: underline;

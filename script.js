@@ -23,7 +23,7 @@ function getServerList() {
         data.forEach(cols => {
 
             let filterValue = document.querySelector("#inputBox").value.toLowerCase();
-            // console.log(filterValue);
+          
             if(cols.Map.toLowerCase().startsWith(filterValue) || cols.MapSize.toLowerCase().startsWith(filterValue) || cols.Name.toLowerCase().startsWith(filterValue))  {
             
             
